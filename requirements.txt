@@ -1,7 +1,4 @@
-Flask==3.0.3
-num2words==0.5.13
-text2digits==0.1.0
-fastapi==0.110.0
-pydantic==2.7.1
-uvicorn==0.22.0
-asgiref==3.7.2
+fastapi==0.118.0
+uvicorn==0.37.0
+pydantic==2.11.9
+starlette==0.48.0

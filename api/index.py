@@ -7,7 +7,7 @@ import re
 app = FastAPI()
 
 # Use env var if set (for deployment), else local data.db
-DB_PATH = os.environ.get("DATA_DB", "data.db")
+DB_PATH = os.environ.get("DATA_DB", "api/data.db")
 
 ALLOWED_MEASURES = {
     "Violent crime rate",

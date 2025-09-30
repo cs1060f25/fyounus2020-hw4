@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/county_data.py": {
+      "runtime": "python3.9"
+    }
+  },
+  "routes": [
+    {
+      "src": "/county_data",
+      "dest": "/api/county_data.py"
+    }
+  ]
+}
