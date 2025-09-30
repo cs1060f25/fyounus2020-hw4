@@ -108,5 +108,37 @@ async def county_data(request: Request):
 
     return results
 
-# Vercel handler
-handler = Mangum(app)
+# Vercel handler - simple approach without Mangum
+def handler(request):
+    from fastapi import Request as FastAPIRequest
+    from fastapi.responses import JSONResponse
+    import json
+    
+    # Convert Vercel request to FastAPI request format
+    body = request.get('body', '{}')
+    if isinstance(body, str):
+        body = json.loads(body)
+    
+    # Create a mock FastAPI request
+    scope = {
+        'type': 'http',
+        'method': request.get('httpMethod', 'GET'),
+        'path': request.get('path', '/'),
+        'headers': [(k.lower().encode(), v.encode()) for k, v in request.get('headers', {}).items()],
+        'query_string': request.get('queryStringParameters', {}).items() if request.get('queryStringParameters') else b'',
+    }
+    
+    # Call the FastAPI app directly
+    from fastapi.testclient import TestClient
+    client = TestClient(app)
+    
+    if request.get('httpMethod') == 'POST':
+        response = client.post('/county_data', json=body)
+    else:
+        response = client.get('/')
+    
+    return {
+        'statusCode': response.status_code,
+        'headers': {'Content-Type': 'application/json'},
+        'body': response.text
+    }
