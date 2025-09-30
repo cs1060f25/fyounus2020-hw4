@@ -5,7 +5,7 @@ from asgiref.wsgi import WsgiToAsgi  # <-- adapter
 
 app = FastAPI()
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "data.sqlite")
+DB_PATH = os.path.join(os.path.dirname(__file__), "data.db")
 
 ALLOWED_MEASURES = {
     "Violent crime rate",
