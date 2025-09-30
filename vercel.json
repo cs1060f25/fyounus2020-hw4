@@ -5,11 +5,5 @@
       "src": "api/county_data.py",
       "use": "@vercel/python"
     }
-  ],
-  "routes": [
-    {
-      "src": "/county_data",
-      "dest": "/api/county_data.py"
-    }
   ]
 }
