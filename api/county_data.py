@@ -6,6 +6,10 @@ app = FastAPI()
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "data.db")
 
+@app.get("/")
+async def health_check():
+    return {"status": "ok", "db_path": DB_PATH, "db_exists": os.path.exists(DB_PATH)}
+
 ALLOWED_MEASURES = {
     "Violent crime rate",
     "Unemployment",
