@@ -86,6 +86,6 @@ async def county_data(request: Request):
 
     return results
 
-# Vercel requires a variable named "handler" for serverless functions.
-# FastAPI is ASGI, so we expose it directly.
-handler = app
+# Vercel handler - must be named 'handler'
+from mangum import Mangum
+handler = Mangum(app)
