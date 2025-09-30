@@ -1,1 +1,1 @@
-https://fyounus2020-hw4-git-main-faisal-younus-projects.vercel.app/api/index
+https://fyounus2020-hw4-git-main-faisal-younus-projects.vercel.app/api/county_data
