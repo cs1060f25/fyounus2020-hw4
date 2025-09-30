@@ -1,4 +1,3 @@
-# main.py
 from fastapi import FastAPI, HTTPException, Request
 import sqlite3
 import os
@@ -7,7 +6,7 @@ import re
 app = FastAPI()
 
 # Use env var if set (for deployment), else local data.db
-DB_PATH = os.environ.get("DATA_DB", "data.db")
+DB_PATH = os.environ.get("DATA_DB", "api/data.db")
 
 ALLOWED_MEASURES = {
     "Violent crime rate",
@@ -31,6 +30,10 @@ def get_db_connection():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+@app.get("/")
+async def health_check():
+    return {"status": "ok", "message": "County Health Data API is running"}
 
 @app.post("/county_data")
 async def county_data(request: Request):
@@ -106,3 +109,7 @@ async def county_data(request: Request):
         raise HTTPException(status_code=404, detail="No data for that zip/measure_name")
 
     return results
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
