@@ -1,1 +1,1 @@
-https://68db4c787e8e42baa5405e61--fyounus2020-hw4.netlify.app/.netlify/functions/county_data
+https://fyounus2020-hw4.onrender.com/county_data
