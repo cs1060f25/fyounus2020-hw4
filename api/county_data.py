@@ -1,11 +1,11 @@
-# api/county_data.py
 from fastapi import FastAPI, HTTPException, Request
 import sqlite3, os, re
 from starlette.responses import JSONResponse
+from asgiref.wsgi import WsgiToAsgi  # <-- adapter
 
 app = FastAPI()
 
-DB_PATH = os.environ.get("DATA_DB", "data.db")
+DB_PATH = os.path.join(os.path.dirname(__file__), "data.sqlite")
 
 ALLOWED_MEASURES = {
     "Violent crime rate",
