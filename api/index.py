@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException, Request
 import sqlite3
 import os
 import re
+from mangum import Mangum
 
 app = FastAPI()
 
@@ -108,5 +109,4 @@ async def county_data(request: Request):
     return results
 
 # Vercel handler
-from mangum import Mangum
 handler = Mangum(app)
