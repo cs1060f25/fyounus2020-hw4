@@ -1,6 +1,7 @@
 # api/county_data.py
 from fastapi import FastAPI, HTTPException, Request
 import sqlite3, os, re
+from starlette.responses import JSONResponse
 
 app = FastAPI()
 
@@ -63,11 +64,9 @@ async def county_data(request: Request):
     for zr in zip_rows:
         county, state_abbr, county_code = zr["county"], zr["state_abbreviation"], zr["county_code"]
 
-        # Try by county_code first
         cur.execute("SELECT * FROM county_health_rankings WHERE measure_name = ? AND county_code = ?", (measure, county_code))
         rows = cur.fetchall()
 
-        # Fallback: county+state
         if not rows:
             cur.execute("""SELECT * FROM county_health_rankings
                            WHERE measure_name = ? AND county = ? AND (state = ? OR state_code = ?)""",
@@ -83,3 +82,7 @@ async def county_data(request: Request):
         raise HTTPException(status_code=404, detail="No data for that zip/measure_name")
 
     return results
+
+# Vercel requires a variable named "handler" for serverless functions.
+# FastAPI is ASGI, so we expose it directly.
+handler = app
