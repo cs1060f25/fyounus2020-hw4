@@ -106,3 +106,7 @@ async def county_data(request: Request):
         raise HTTPException(status_code=404, detail="No data for that zip/measure_name")
 
     return results
+
+# Vercel handler
+from mangum import Mangum
+handler = Mangum(app)
