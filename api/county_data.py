@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException, Request
 import sqlite3, os, re
 from starlette.responses import JSONResponse
-from asgiref.wsgi import WsgiToAsgi  # <-- adapter
 
 app = FastAPI()
 
